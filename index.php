@@ -19,18 +19,16 @@
     <div class="alert alert-warning" role="alert">
       Please select Users!!
     </div>
-    <div class="form-group">
-          <label for="state">Please Select:</label>
+    <div>
+    <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-user-plus fa-2x"></i></button>
             <select id="state">
               <option id="active" value="Active">Active</option>
               <option id="not_active" value="Not_active">Not_active</option>
-              <option id="remove1" name="test" value="Delete">Delete</option>
+              <option id="remove1" value="Delete">Delete</option>
             </select>
             <button type="submit" class="btn btn-primary" id="ok">Ok</button>
           </div>
       <div class="col-12">
-      <span class="rows_selected" id="select_count">0 Selected</span>
-      <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-user-plus fa-2x"></i></button>
       <table class="table table-bordered mt-2">
         <thead>
           <th><input type="checkbox" id="select_all"> </th>
@@ -47,7 +45,7 @@
             <td><?php echo $res->name; ?></td>
             <td><?php echo $res->last; ?></td>
             <td><?php echo $res->role; ?></td>
-            <td><?php echo $res->status; ?> </td>
+            <td><?php echo $res->status; ?></td>
             <td><a href="?id=<?php echo $res->id; ?>" class="btn btn-success" data-bs-toggle="modal" data-bs-target ="#edit<?php echo $res->id; ?>"><i class="fa fa-edit">edit</i></a>
             <a href="" class="btn btn-danger" data-bs-toggle="modal" data-bs-target ="#delete<?php echo $res->id; ?>"><i class="fa fa-trash"></i></a>
             </td>
@@ -57,7 +55,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Change User: <?php echo $res->name; ?> <?php echo $res->last; ?></h5>
+                  <h5 class="modal-title" id="exampleModalLabel">Change User: <?php echo $res->name; ?> <?php echo $res->last; ?> <?php echo $res->role; ?> <?php echo $res->status; ?></h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -70,6 +68,17 @@
                       <small>LastName</small>
                       <input type="text" class="form-control" name="last" value="<?php echo $res->last; ?>">
                     </div>
+                    <div class="form-group">
+                    <label for="role">Role:</label>
+                      <select name="role" id="role">
+                        <option value="user">User</option>
+                        <option value="admin">Admin</option>
+                      </select>
+                    </div>
+                    <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" name="status">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">Status:</label>
+                </div>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -103,6 +112,15 @@
       </table>
       </div>
     </div>
+    <div>
+    <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-user-plus fa-2x"></i></button>
+            <select id="stat">
+              <option id="online" value="Online">Active</option>
+              <option id="not_online" value="Not_online">Not_active</option>
+              <option id="clear" value="Del">Delete</option>
+            </select>
+            <button type="submit" class="btn btn-primary" id="oki">Ok</button>
+          </div>
   </div>
 <!-- Modal create-->
 <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

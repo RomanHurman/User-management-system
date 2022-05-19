@@ -8,7 +8,6 @@
 
     if ($status == false) {
         $status = '<i class="fa fa-circle"></i>';
-        
     } else if ($status == true){
         $status = '<i class="fa fa-circle active-circle"></i>';
     }
@@ -18,7 +17,6 @@
         $query = $pdo->prepare($sql);
         $query->execute([$name, $last, $role, $status]);
         if ($query) {
-            
             header("Location: " . $_SERVER['HTTP_REFERER']);
         }
     }
@@ -29,9 +27,9 @@
 
     //Update 
     if (isset($_POST['edit'])) {
-        $sql = ("UPDATE users  SET name=?, last=? WHERE id=?");
+        $sql = ("UPDATE users  SET name=?, last=?, role=?, status=? WHERE id=?");
         $query = $pdo->prepare($sql);
-        $query->execute([$name, $last, $get_id]);
+        $query->execute([$name, $last, $role, $status, $get_id]);
         if ($query) {
             header("Location: " . $_SERVER['HTTP_REFERER']);
         }
@@ -55,23 +53,24 @@
                 header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         }
-
         // Change status active
         if(isset($_POST['sample-id'])) {
-           $ids = $_POST['sample-id'];	
-            $sql = "UPDATE users SET status= 'Active' WHERE id in ($ids)";           
+           $ids = $_POST['sample-id'];
+           $status = '<i class="fa fa-circle active-circle"></i>';
+            $sql = "UPDATE users SET status= ? WHERE id in ($ids)";           
             $query = $pdo->prepare($sql);
-            $query->execute([$ids]);
+            $query->execute([$status]);
             if ($query) {
                 header("Location: " . $_SERVER['HTTP_REFERER']);
             }
         }
-        //Change status not_active
+         //Change status not_active
             if(isset($_POST['samp-id'])) {
                 $ids = $_POST['samp-id'];
-                $sql = "UPDATE users SET status= 'not_active' WHERE id in ($ids)";            
+                $status = '<i class="fa fa-circle"></i>';
+                $sql = "UPDATE users SET status= ? WHERE id in ($ids)";            
                 $query = $pdo->prepare($sql);
-                $query->execute([$ids]);
+                $query->execute([$status]);
                 if ($query) {
                     header("Location: " . $_SERVER['HTTP_REFERER']);
                 }

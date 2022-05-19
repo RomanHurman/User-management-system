@@ -29,3 +29,21 @@ body{
 .form-switch label {
  margin-right: 50px;
 }
+button.btn.btn-success.mt-2 {
+  height: 42px;
+  width: 52px;
+}
+#ok, #oki {
+  height: 42px;
+  width: 52px;
+  margin-top: 8px;
+}
+#state, #stat {
+  margin-left: 5px;
+}
+i.fa.fa-circle {
+  color: grey;
+}
+i.fa.fa-circle.active-circle {
+  color: green;
+}
