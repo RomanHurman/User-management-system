@@ -1,4 +1,4 @@
-	$(document).on('click', '#select_all', function() {          	
+$(document).on('click', '#select_all', function() {          	
 	$(".us_checkbox").prop("checked", this.checked);
 	
 	});	
@@ -190,3 +190,118 @@ if (concept == 'not_online') {
 	console.log('error');
 }
 });
+// add ajax
+$(document).ready(function () {
+    $('.btn-primary').click(function (e) {
+      e.preventDefault();
+      var name = $('#name').val();
+	  var last = $('#last').val();
+	  var role = $("#rols option:selected").val();
+	  var status = $("#status")[0].checked;
+			if (status == false) {
+                status = '<i class="fa fa-circle"></i>';
+            } 
+            else if (status == true){
+                status = '<i class="fa fa-circle active-circle"></i>';
+            }
+	  		if(name === '' || last === ''){
+		$('.alert.alert-primary').show();
+	  }
+      $.ajax
+        ({
+          type: "POST",
+          url: "back.php",
+          data: {
+			  "add": true,
+			  "name": name, 
+			  "last": last,
+			   "role": role, 
+			   "status": status
+			},
+          success: function (data) {
+			window.location.reload();
+          }
+        });
+    });
+  })
+  //delete
+$(document).on('click','#btn_delete',function(e)
+{
+	e.preventDefault();
+	var Delete_ID = $(this).attr('data-del-id');
+	console.log(Delete_ID);
+	$('#delete').modal('show');
+	$(document).on('click','#btn_delete_record',function()
+	{
+		$.ajax(
+			{
+				url: 'back.php',
+				method: 'post',
+				data:"del-id="+Delete_ID,
+				success: function(data)
+				{
+					window.location.reload();
+				}
+			})
+	})
+})
+//edit button
+$(document).on('click','#btn_edit',function(e)
+{
+	e.preventDefault();
+	$('#update').modal('show');
+	var Id = $(this).attr('data-upd-id');
+	var update_id = $(this).data("upd-id");
+	$('#upd-id').val(update_id);
+	$.ajax(
+		{
+			url: 'back.php',
+			method: 'post',
+			data:{"upd-id":Id,
+		},
+			success: function(data)
+			{
+			$('#upd-id').val();
+			}
+		})
+
+})
+
+$(document).on('click','#btn_update',function(e)
+{
+	e.preventDefault();
+	$('#update').modal('show');
+	var id = $('#upd-id').val();
+    var name = $('#upd-name').val();
+	var last = $('#upd-last').val();
+	var role = $("#rol option:selected").val();
+	var status = $("#stats")[0].checked;
+		if (status == false) {
+			status = '<i class="fa fa-circle"></i>';
+		} 
+		else if (status == true){
+			status = '<i class="fa fa-circle active-circle"></i>';
+		}
+		if(name === '' || last === ''){
+		$('.alert.alert-primary').show();
+	}
+	{
+		$.ajax(
+			{
+				url: 'back.php',
+				method: 'post',
+				data:{
+					"update": id,
+					name: name,
+					last: last,
+					role: role,
+					status: status,
+				},
+				
+				success: function(data)
+				{
+					window.location.reload();
+				}
+			})
+	}
+})

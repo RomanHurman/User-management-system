@@ -8,4 +8,5 @@
     } catch(PDOException $e) {
         echo 'Error connection with Db'. $e->getMessage();
     }
+
 ?>
