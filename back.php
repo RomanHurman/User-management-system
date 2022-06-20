@@ -6,10 +6,20 @@
     $role = $_POST['role'];
     $status = $_POST['status'];
     
-        //Create 
-        if($name === "" || $last === "" ){
-        return false;
+    if ($status == false) {
+        $status = '<i class="fa fa-circle"></i>';
+    } 
+    else if ($status == true){
+        $status = '<i class="fa fa-circle active-circle"></i>';
     }
+    
+    if ($role == false) {
+        $role = 'user';
+    } 
+    else if ($role == true){
+        $role = 'admin';
+    }
+    
     if (isset($_POST['add'])) {
         $sql = ("INSERT INTO users (name,last,role,status) VALUES(?,?,?,?)");
         $query = $pdo->prepare($sql);

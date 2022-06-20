@@ -1,0 +1,52 @@
+body{
+    margin-top:20px;
+    background:#f8f8f8;
+  }
+  .active-circle {
+    color: green;
+  }
+  .not-active-circle {
+    color: grey;
+  }
+ h3{
+    color: blue;
+}
+.alert.alert-warning {
+  display: none;
+}
+.alert.alert-primary {
+  display: none;
+}
+.form-group {
+  margin-top: 10px;
+}
+.form-check.form-switch {
+  margin-top: 10px;
+}
+.form-switch {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: row-reverse;
+  padding-left: 1px;
+}
+.form-switch label {
+ margin-right: 50px;
+}
+button.btn.btn-success.mt-2 {
+  height: 42px;
+  width: 52px;
+}
+#ok, #oki {
+  height: 42px;
+  width: 52px;
+  margin-top: 8px;
+}
+#state, #stat {
+  margin-left: 5px;
+}
+i.fa.fa-circle {
+  color: grey;
+}
+i.fa.fa-circle.active-circle {
+  color: green;
+}

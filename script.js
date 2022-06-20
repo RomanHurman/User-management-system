@@ -35,10 +35,13 @@ $('#ok').on('click', function(e) {
 					cache:false,  
 					data: 
 					'id='+selected_values, 
-					success: function(response) {								
+					success: function(response) {
+						window.location.reload();								
 					}   
 				});				
 			}
+	} else {
+		console.log('error');
 	}
 //Change status in active
 if (conceptState == 'active') {  
@@ -60,10 +63,13 @@ if (conceptState == 'active') {
 				cache:false, 
 				data:
 					'sample-id='+selected_values,
-				success: function(response) {							
+				success: function(response) {
+					window.location.reload();							
 				}   
 			});				
 		}
+} else {
+	console.log('error');
 }
 //Change status in not_active
 if (conceptState == 'not_active') {  
@@ -85,10 +91,13 @@ if (conceptState == 'not_active') {
 				cache:false,  
 				data:	
 					'samp-id='+selected_values,
-				success: function(response) {							
+				success: function(response) {
+						window.location.reload();							
 				}   
 			});				
 		}
+} else {
+	console.log('error');
 }
 });
 //Down select menu
@@ -116,10 +125,13 @@ $('#oki').on('click', function(e) {
 					cache:false,  
 					data: 
 					'id='+selected_values, 
-					success: function(response) {								
+					success: function(response) {
+						window.location.reload();								
 					}   
 				});				
 			}
+	} else {
+		console.log('error');
 	}
 //Change status in active
 if (concept == 'online') {  
@@ -141,10 +153,13 @@ if (concept == 'online') {
 				cache:false, 
 				data:
 					'sample-id='+selected_values,
-				success: function(response) {					
+				success: function(response) {
+					window.location.reload();					
 				}   
 			});				
 		}
+} else {
+	console.log('error');
 }
 //Change status in not_active
 if (concept == 'not_online') {  
@@ -166,32 +181,32 @@ if (concept == 'not_online') {
 				cache:false,  
 				data:	
 					'samp-id='+selected_values,
-				success: function(response) {							
+				success: function(response) {
+					window.location.reload();							
 				}   
 			});				
 		}
+} else {
+	console.log('error');
 }
 });
 // add ajax
 $(document).ready(function () {
-    $('.btn-dark').click(function (e) {
+    $('.btn-primary').click(function (e) {
       e.preventDefault();
       var name = $('#name').val();
 	  var last = $('#last').val();
-	  var role = $("#rols").val();
+	  var role = $("#rols option:selected").val();
 	  var status = $("#status")[0].checked;
-			if (status === false) {
-                status = '0';
+			if (status == false) {
+                status = '<i class="fa fa-circle"></i>';
             } 
-            else if (status === true){
-                status = '1';
+            else if (status == true){
+                status = '<i class="fa fa-circle active-circle"></i>';
             }
-	  		if(name === "" || last === ""){
-			alert("Please fill in the fields!");
-				return false;
-	} else {
-		alert("Success!");
-}
+	  		if(name === '' || last === ''){
+		$('.alert.alert-primary').show();
+	  }
       $.ajax
         ({
           type: "POST",
@@ -201,9 +216,10 @@ $(document).ready(function () {
 			  "name": name, 
 			  "last": last,
 			   "role": role, 
-			   "status": status,
+			   "status": status
 			},
           success: function (data) {
+			// window.location.reload();
           }
         });
     });
@@ -224,6 +240,7 @@ $(document).on('click','#btn_delete',function(e)
 				data:"del-id="+Delete_ID,
 				success: function(data)
 				{
+					window.location.reload();
 				}
 			})
 	})
@@ -247,6 +264,7 @@ $(document).on('click','#btn_edit',function(e)
 			$('#upd-id').val();
 			}
 		})
+
 })
 
 $(document).on('click','#btn_update',function(e)
@@ -256,19 +274,16 @@ $(document).on('click','#btn_update',function(e)
 	var id = $('#upd-id').val();
     var name = $('#upd-name').val();
 	var last = $('#upd-last').val();
-	var role = $("#rol").val();
+	var role = $("#rol option:selected").val();
 	var status = $("#stats")[0].checked;
-	if (status === false) {
-		status = '0';
-	} 
-	else if (status === true){
-		status = '1';
-	}
-	if(name === "" || last === ""){
-		alert("Please fill in the fields!");
-		return false;
-	} else {
-		alert("Success!");
+		if (status == false) {
+			status = '<i class="fa fa-circle"></i>';
+		} 
+		else if (status == true){
+			status = '<i class="fa fa-circle active-circle"></i>';
+		}
+		if(name === '' || last === ''){
+		$('.alert.alert-primary').show();
 	}
 	{
 		$.ajax(
@@ -282,8 +297,10 @@ $(document).on('click','#btn_update',function(e)
 					role: role,
 					status: status,
 				},
+				
 				success: function(data)
 				{
+					// window.location.reload();
 				}
 			})
 	}

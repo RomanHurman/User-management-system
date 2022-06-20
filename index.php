@@ -59,9 +59,6 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-          <div class="alert alert-primary" role="alert">
-          Please fill in the fields!
-        </div>
             <form>
             <input type="hidden" class="form-control my-2" name="upd-id" id="upd-id" value="">
             <label>First Name</label>
@@ -71,8 +68,8 @@
               <div class="form-group">
           <label for="role">Role:</label>
             <select name="role" id="rol">
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option value="0">User</option>
+              <option value="1">Admin</option>
             </select>
           </div>
             <div class="form-check form-switch">
@@ -130,9 +127,6 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-      <div class="alert alert-primary" role="alert">
-          Please fill in the fields!
-        </div>
         <form action="" method="post">
           <div class="form-group">
           <label>First Name:</label>
@@ -145,8 +139,8 @@
           <div class="form-group">
           <label for="role">Role:</label>
             <select name="role" id="rols">
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
+              <option value="0">User</option>
+              <option value="1">Admin</option>
             </select>
           </div>
           <div class="form-check form-switch">
@@ -156,7 +150,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Save</button>
+        <button type="submit" class="btn btn-dark">Save</button>
         </form>
       </div>
     </div>
