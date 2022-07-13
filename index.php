@@ -28,7 +28,7 @@
             </select>
             <button type="submit" class="btn btn-primary" id="ok">Ok</button>
           </div>
-      <div class="col-12">
+      <div class="col-12" id="content">
       <table class="table table-bordered mt-2">
         <thead>
           <th><input type="checkbox" id="select_all"> </th>

@@ -74,5 +74,5 @@
                 $sql = ("UPDATE users  SET name=?, last=?, role=?, status=? WHERE id in ($upd_id)");
                 $query = $pdo->prepare($sql);
                 $query->execute([$name,$last,$role,$status]);
-                } 
+            } 
 ?>

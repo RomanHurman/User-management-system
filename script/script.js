@@ -20,8 +20,8 @@ $('#ok').on('click', function(e) {
 		$(".us_checkbox:checked").each(function() {  
 			user.push($(this).data('sample-id'));
 		});	
-		if(user.length <=0)  {  
-			$('.alert.alert-warning').show(); 
+		if(user.length <=0)  {   
+			errorData();
 		}  
 		else { 	
 			WRN_PROFILE_DELETE = "Are you sure you want to remove "+(user.length>1?"these":"this")+" Users?";  
@@ -35,7 +35,8 @@ $('#ok').on('click', function(e) {
 					cache:false,  
 					data: 
 					'id='+selected_values, 
-					success: function(response) {								
+					success: function(data) {
+						refData();								
 					}   
 				});				
 			}
@@ -46,7 +47,7 @@ if (conceptState == 'active') {
 		user.push($(this).data('sample-id'));
 	});	
 	if(user.length <=0)  {  
-		$('.alert.alert-warning').show(); 
+		errorData();
 	}  
 	else { 	
 		WRN_PROFILE_UPDATE = "You want to change status to active? "+(user.length>1?"these":"this")+" Users?";  
@@ -60,7 +61,8 @@ if (conceptState == 'active') {
 				cache:false, 
 				data:
 					'sample-id='+selected_values,
-				success: function(response) {							
+				success: function(data) {
+						refData();							
 				}   
 			});				
 		}
@@ -70,8 +72,8 @@ if (conceptState == 'not_active') {
 	$(".us_checkbox:checked").each(function() {  
 		user.push($(this).data('sample-id'));
 	});	
-	if(user.length <=0)  {  
-		$('.alert.alert-warning').show(); 
+	if(user.length <=0)  {   
+		errorData();
 	}  
 	else { 	
 		WRN_PROFILE_UPDATE = "You want to change status to not_active? "+(user.length>1?"these":"this")+" Users?";  
@@ -85,7 +87,8 @@ if (conceptState == 'not_active') {
 				cache:false,  
 				data:	
 					'samp-id='+selected_values,
-				success: function(response) {							
+				success: function(data) {	
+					refData();						
 				}   
 			});				
 		}
@@ -101,8 +104,8 @@ $('#oki').on('click', function(e) {
 		$(".us_checkbox:checked").each(function() {  
 			user.push($(this).data('sample-id'));
 		});	
-		if(user.length <=0)  {  
-			$('.alert.alert-warning').show(); 
+		if(user.length <=0)  {   
+			errorData();
 		}  
 		else { 	
 			WRN_PROFILE_DELETE = "Are you sure you want to remove "+(user.length>1?"these":"this")+" Users?";  
@@ -116,7 +119,8 @@ $('#oki').on('click', function(e) {
 					cache:false,  
 					data: 
 					'id='+selected_values, 
-					success: function(response) {								
+					success: function(response) {	
+						refData();							
 					}   
 				});				
 			}
@@ -127,7 +131,7 @@ if (concept == 'online') {
 		user.push($(this).data('sample-id'));
 	});	
 	if(user.length <=0)  {  
-		$('.alert.alert-warning').show(); 
+			errorData();
 	}  
 	else { 	
 		WRN_PROFILE_UPDATE = "You want to change status to active? "+(user.length>1?"these":"this")+" Users?";  
@@ -141,7 +145,8 @@ if (concept == 'online') {
 				cache:false, 
 				data:
 					'sample-id='+selected_values,
-				success: function(response) {					
+				success: function(response) {
+					refData();					
 				}   
 			});				
 		}
@@ -152,7 +157,7 @@ if (concept == 'not_online') {
 		user.push($(this).data('sample-id'));
 	});	
 	if(user.length <=0)  {  
-		$('.alert.alert-warning').show(); 
+			errorData();
 	}  
 	else { 	
 		WRN_PROFILE_UPDATE = "You want to change status to not_active? "+(user.length>1?"these":"this")+" Users?";  
@@ -166,7 +171,8 @@ if (concept == 'not_online') {
 				cache:false,  
 				data:	
 					'samp-id='+selected_values,
-				success: function(response) {							
+				success: function(response) {
+					refData();							
 				}   
 			});				
 		}
@@ -189,9 +195,7 @@ $(document).ready(function () {
 	  		if(name === "" || last === ""){
 			alert("Please fill in the fields!");
 				return false;
-	} else {
-		alert("Success!");
-}
+	}
       $.ajax
         ({
           type: "POST",
@@ -204,6 +208,8 @@ $(document).ready(function () {
 			   "status": status,
 			},
           success: function (data) {
+				$("#myModal").modal('hide');
+					refData();
           }
         });
     });
@@ -224,6 +230,8 @@ $(document).on('click','#btn_delete',function(e)
 				data:"del-id="+Delete_ID,
 				success: function(data)
 				{
+					$("#delete").modal('hide');
+					refData();
 				}
 			})
 	})
@@ -267,8 +275,6 @@ $(document).on('click','#btn_update',function(e)
 	if(name === "" || last === ""){
 		alert("Please fill in the fields!");
 		return false;
-	} else {
-		alert("Success!");
 	}
 	{
 		$.ajax(
@@ -284,7 +290,25 @@ $(document).on('click','#btn_update',function(e)
 				},
 				success: function(data)
 				{
+				$("#update").modal('hide');
+					refData();
 				}
 			})
 	}
 })
+
+function refData() {
+    $.ajax({
+        type: "GET",
+        url: 'get-info.php',
+        success: function (response) {
+            $('#content').html(response);
+        },
+    });
+};
+function errorData() {
+	$('.alert.alert-warning').show();
+	setTimeout(function() { 
+		$('.alert.alert-warning').fadeOut(1000); 
+	}, 1000);
+};
