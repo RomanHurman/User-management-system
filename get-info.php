@@ -22,7 +22,10 @@
             <button class="btn btn-danger" id="btn_delete" data-del-id="<?= $res->id; ?>"><span class="fa fa-trash"></span></button>
             </td>
           </tr>
-          <div class="modal" id="update">
+          <?php } ?>
+        </tbody>
+      </table>
+      <div class="modal" id="update"> 
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -54,8 +57,8 @@
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Close</button>
           </div>
         </div>
-      </div>
-    </div>
+      </div> 
+     </div> 
     <div class="modal" id="delete">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -64,13 +67,15 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p> Do You Want to Delete this User ?</p>
+            <p class="remUser"> Do You Want to Delete this User ?</p>
+            <div class="but-del">
             <button type="button" class="btn btn-success" id="btn_delete_record">Delete Now</button>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Close</button>
+            </div>
           </div>
+          <div class="result">
+          Success!
+        </div>
         </div>
       </div>
-    </div>
-          <?php } ?>
-        </tbody>
-      </table>
+    </div> 

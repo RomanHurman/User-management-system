@@ -72,6 +72,7 @@
             if (isset($_POST['update'])) {
                 $upd_id = $_POST['update'];
                 $sql = ("UPDATE users  SET name=?, last=?, role=?, status=? WHERE id in ($upd_id)");
+                echo $name;
                 $query = $pdo->prepare($sql);
                 $query->execute([$name,$last,$role,$status]);
             } 

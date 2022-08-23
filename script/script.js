@@ -24,10 +24,10 @@ $('#ok').on('click', function(e) {
 			errorData();
 		}  
 		else { 	
-			WRN_PROFILE_DELETE = "Are you sure you want to remove "+(user.length>1?"these":"this")+" Users?";  
+			$("#delete").modal('show');
 		}
-			var checked = confirm(WRN_PROFILE_DELETE);  
-			if(checked == true) {			
+				$(document).on('click','#btn_delete_record',function()
+			{			
 				var selected_values = user.join(","); 
 				$.ajax({ 
 					type: "POST",  
@@ -36,10 +36,20 @@ $('#ok').on('click', function(e) {
 					data: 
 					'id='+selected_values, 
 					success: function(data) {
+						$('#delete').modal('hide');
 						refData();								
 					}   
-				});				
+				});	
+			})			
 			}
+	// select choiceUp
+	if (conceptState == 'choiceUp') {    
+		$(".us_checkbox:checked").each(function() {  
+			user.push($(this).data('sample-id'));
+		});	
+		if(user.length <=0)  {   
+			errorData();
+		}  
 	}
 //Change status in active
 if (conceptState == 'active') {  
@@ -50,10 +60,10 @@ if (conceptState == 'active') {
 		errorData();
 	}  
 	else { 	
-		WRN_PROFILE_UPDATE = "You want to change status to active? "+(user.length>1?"these":"this")+" Users?";  
+		$("#exchange").modal('show');  
 	}
-		var checked = confirm(WRN_PROFILE_UPDATE);  
-		if(checked == true) {			
+	$(document).on('click','#activs',function()
+	{		
 			var selected_values = user.join(","); 
 			$.ajax({ 
 				type: "POST",  
@@ -62,11 +72,12 @@ if (conceptState == 'active') {
 				data:
 					'sample-id='+selected_values,
 				success: function(data) {
+					$("#exchange").modal('hide');
 						refData();							
 				}   
-			});				
+			});	
+		})			
 		}
-}
 //Change status in not_active
 if (conceptState == 'not_active') {  
 	$(".us_checkbox:checked").each(function() {  
@@ -76,10 +87,10 @@ if (conceptState == 'not_active') {
 		errorData();
 	}  
 	else { 	
-		WRN_PROFILE_UPDATE = "You want to change status to not_active? "+(user.length>1?"these":"this")+" Users?";  
+		$("#exchange-status").modal('show'); 
 	}
-		var checked = confirm(WRN_PROFILE_UPDATE);  
-		if(checked == true) {			
+	$(document).on('click','#activs',function()
+	{	
 			var selected_values = user.join(","); 
 			$.ajax({ 
 				type: "POST",  
@@ -87,12 +98,13 @@ if (conceptState == 'not_active') {
 				cache:false,  
 				data:	
 					'samp-id='+selected_values,
-				success: function(data) {	
+				success: function(data) {
+					$("#exchange-status").modal('hide');	
 					refData();						
 				}   
-			});				
+			});	
+		})			
 		}
-}
 });
 //Down select menu
 // delete selected users
@@ -108,22 +120,32 @@ $('#oki').on('click', function(e) {
 			errorData();
 		}  
 		else { 	
-			WRN_PROFILE_DELETE = "Are you sure you want to remove "+(user.length>1?"these":"this")+" Users?";  
+			$("#delete").modal('show');
 		}
-			var checked = confirm(WRN_PROFILE_DELETE);  
-			if(checked == true) {			
+		$(document).on('click','#btn_delete_record',function()
+		{	  			
 				var selected_values = user.join(","); 
 				$.ajax({ 
 					type: "POST",  
 					url: "back.php",  
-					cache:false,  
+					cache: false,  
 					data: 
 					'id='+selected_values, 
 					success: function(response) {	
+						$('#delete').modal('hide');
 						refData();							
 					}   
-				});				
+				});	
+			})			
 			}
+	// select choiceDown
+	if (concept == 'choiceDown') {    
+		$(".us_checkbox:checked").each(function() {  
+			user.push($(this).data('sample-id'));
+		});	
+		if(user.length <=0)  {   
+			errorData();
+		}  
 	}
 //Change status in active
 if (concept == 'online') {  
@@ -134,10 +156,10 @@ if (concept == 'online') {
 			errorData();
 	}  
 	else { 	
-		WRN_PROFILE_UPDATE = "You want to change status to active? "+(user.length>1?"these":"this")+" Users?";  
+		$("#exchange").modal('show');  
 	}
-		var checked = confirm(WRN_PROFILE_UPDATE);  
-		if(checked == true) {			
+	$(document).on('click','#activs',function()
+	{	
 			var selected_values = user.join(","); 
 			$.ajax({ 
 				type: "POST",  
@@ -146,11 +168,12 @@ if (concept == 'online') {
 				data:
 					'sample-id='+selected_values,
 				success: function(response) {
+					$("#exchange").modal('hide');
 					refData();					
 				}   
-			});				
+			});	
+			})			
 		}
-}
 //Change status in not_active
 if (concept == 'not_online') {  
 	$(".us_checkbox:checked").each(function() {  
@@ -160,10 +183,10 @@ if (concept == 'not_online') {
 			errorData();
 	}  
 	else { 	
-		WRN_PROFILE_UPDATE = "You want to change status to not_active? "+(user.length>1?"these":"this")+" Users?";  
+		$("#exchange-status").modal('show'); 
 	}
-		var checked = confirm(WRN_PROFILE_UPDATE);  
-		if(checked == true) {			
+	$(document).on('click','#activs',function()
+	{		
 			var selected_values = user.join(","); 
 			$.ajax({ 
 				type: "POST",  
@@ -172,11 +195,12 @@ if (concept == 'not_online') {
 				data:	
 					'samp-id='+selected_values,
 				success: function(response) {
+					$("#exchange-status").modal('hide');
 					refData();							
 				}   
-			});				
+			});
+		})				
 		}
-}
 });
 // add ajax
 $(document).ready(function () {
@@ -193,7 +217,10 @@ $(document).ready(function () {
                 status = '1';
             }
 	  		if(name === "" || last === ""){
-			alert("Please fill in the fields!");
+			$('.results').show().text('Please fill in the fields!');
+		setTimeout(function() { 
+		$('.results').fadeOut(1000); 
+			}, 1000);
 				return false;
 	}
       $.ajax
@@ -208,8 +235,14 @@ $(document).ready(function () {
 			   "status": status,
 			},
           success: function (data) {
+				$("#luck").modal('show');
 				$("#myModal").modal('hide');
+				setTimeout(function() { 
+					$('#luck').modal('hide'); 
+				}, 3000);
 					refData();
+					$('#name').val("");
+					$('#last').val("");
           }
         });
     });
@@ -220,7 +253,7 @@ $(document).on('click','#btn_delete',function(e)
 	e.preventDefault();
 	var Delete_ID = $(this).attr('data-del-id');
 	console.log(Delete_ID);
-	$('#delete').modal('show');
+	$("#delete").modal('show');
 	$(document).on('click','#btn_delete_record',function()
 	{
 		$.ajax(
@@ -230,7 +263,11 @@ $(document).on('click','#btn_delete',function(e)
 				data:"del-id="+Delete_ID,
 				success: function(data)
 				{
-					$("#delete").modal('hide');
+					$("#luck").modal('show');
+					$('#delete').modal('hide');
+					setTimeout(function() { 
+					$('#luck').modal('hide'); 
+				}, 3000);
 					refData();
 				}
 			})
@@ -243,20 +280,29 @@ $(document).on('click','#btn_edit',function(e)
 	$('#update').modal('show');
 	var Id = $(this).attr('data-upd-id');
 	var update_id = $(this).data("upd-id");
+	var update_name = $(this).data("upd-name");
+	var update_last = $(this).data("upd-last");
+	console.log(update_id);
+	console.log(update_name);
+	console.log(update_last);
 	$('#upd-id').val(update_id);
+	$('#upd-name').val(update_name);
+	$('#upd-last').val(update_last);
 	$.ajax(
 		{
 			url: 'back.php',
 			method: 'post',
 			data:{"upd-id":Id,
+				"upd-name": update_name,
+				"upd-last": update_last
 		},
 			success: function(data)
 			{
 			$('#upd-id').val();
+			$('#upd-name').val();
 			}
 		})
 })
-
 $(document).on('click','#btn_update',function(e)
 {
 	e.preventDefault();
@@ -273,7 +319,10 @@ $(document).on('click','#btn_update',function(e)
 		status = '1';
 	}
 	if(name === "" || last === ""){
-		alert("Please fill in the fields!");
+		$('.res').show().text('Please fill in the fields!');
+		setTimeout(function() { 
+			$('.res').fadeOut(1000); 
+		}, 1000);
 		return false;
 	}
 	{
@@ -290,16 +339,20 @@ $(document).on('click','#btn_update',function(e)
 				},
 				success: function(data)
 				{
-				$("#update").modal('hide');
+				$("#luck").modal('show');
+				$("#update").modal('hide'); 
+				setTimeout(function() { 
+					$('#luck').modal('hide'); 
+				}, 3000);
+				$('#upd-name').val();
 					refData();
 				}
 			})
 	}
 })
-
 function refData() {
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: 'get-info.php',
         success: function (response) {
             $('#content').html(response);
@@ -307,8 +360,8 @@ function refData() {
     });
 };
 function errorData() {
-	$('.alert.alert-warning').show();
-	setTimeout(function() { 
-		$('.alert.alert-warning').fadeOut(1000); 
-	}, 1000);
+	$('#mistake').modal('show');
+		setTimeout(function() { 
+		$('#mistake').modal('hide'); 
+	}, 3000);
 };

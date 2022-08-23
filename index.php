@@ -16,14 +16,84 @@
   <div class="container">
     <h3>Users-Table</h3>
     <div class="row">
-    <div class="alert alert-warning" role="alert">
-      Please select Users!!
+    <!--_status check -->
+    <div class="modal" id="mistake">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="text-dark">Try Again!</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="fault_user">Please Select User!!</p>
+            <div class="fault-block"><button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Close</button></div>
+          </div>
+        </div>
+      </div>
     </div>
+    <!--_status check -->
+    <!-- Modal delete success-->
+    <div class="modal" id="luck">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="text-dark">Great!</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="luck_suc"> Success!!!</p>
+            <div class="luck-block"><button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Close</button></div>
+          </div>
+          <div class="result">
+          Success!
+        </div>
+        </div>
+      </div>
+    </div>
+          <!-- Modal delete success-->
+          <!-- Modal set-active status-->
+    <div class="modal" id="exchange">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="text-dark">Change status</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="changes_status"> Do you wanna change status to active?</p>
+            <div class="change_block">
+            <button type="button" class="btn btn-success" id="activs">Go</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Cancel</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+          <!-- Modal set-active status-->
+          <!-- Modal set-not-active status-->
+    <div class="modal" id="exchange-status">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="text-dark">Change status</h3>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="changes_status"> Do you wanna change status to not active?</p>
+            <div class="change_block">
+            <button type="button" class="btn btn-success" id="activs">Go</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+          <!-- Modal set-not-active status-->
     <div>
     <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-user-plus fa-2x"></i></button>
             <select id="state">
-              <option id="active" value="Active">Active</option>
-              <option id="not_active" value="Not_active">Not_active</option>
+            <option id="choiceUp">Please select</option>
+              <option id="active" value="Active">Set active</option>
+              <option id="not_active" value="Not_active">Set not active</option>
               <option id="remove1" value="Delete">Delete</option>
             </select>
             <button type="submit" class="btn btn-primary" id="ok">Ok</button>
@@ -45,9 +115,9 @@
             <td><?php echo $res->role; ?></td>
             <td><?php echo $res->status; ?></td>
             <td>
-              <button class="btn btn-success" id="btn_edit" data-upd-id="<?= $res->id; ?>" data-upd-name="<?= $res->name; ?>" data-upd-last="<?= $res->last; ?>"><span class="fa fa-edit">edit</span></button>
-
-            <button class="btn btn-danger" id="btn_delete" data-del-id="<?= $res->id; ?>"><span class="fa fa-trash"></span></button>
+              <button class="btn btn-success" id="btn_edit" 
+              data-upd-id="<?= $res->id; ?>" data-upd-name="<?= $res->name; ?>" data-upd-last="<?= $res->last; ?>"><span class="fa fa-edit">edit</span></button>
+            <button class="btn btn-danger" id="btn_delete"  data-bs-target="#delete" data-del-id="<?= $res->id; ?>"><span class="fa fa-trash"></span></button>
             </td>
           </tr>
          <!-- Modal edit-->
@@ -60,11 +130,11 @@
           </div>
           <div class="modal-body">
             <form>
-            <input type="hidden" class="form-control my-2" name="upd-id" id="upd-id" value="">
+            <input type="hidden" class="form-control my-2" name="upd-id" id="upd-id">
             <label>First Name</label>
-              <input type="text" class="form-control my-2"  name="upd-name" id="upd-name" placeholder="Change First Name">
+              <input type="text" class="form-control my-2"  name="upd-name" id="upd-name" placeholder="Change First Name" value='<?php echo $name;?>'>
               <label>Last Name</label>
-              <input type="text" class="form-control my-2" name="upd-last" id="upd-last" placeholder="Change Last Name">
+              <input type="text" class="form-control my-2" name="upd-last" id="upd-last" placeholder="Change Last Name" value='<?php echo $last;?>'>
               <div class="form-group">
           <label for="role">Role:</label>
             <select name="role" id="rol">
@@ -79,9 +149,11 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-success" id="btn_update">Save Changes</button>
+            <button type="button" class="btn btn-success" id="btn_update"
+            >Save Changes</button>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Close</button>
           </div>
+          <div class="res"></div>
         </div>
       </div>
     </div>
@@ -91,14 +163,19 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h3 class="text-dark">Delete User</h3>
+            <h3 class="text-dark">Delete User?</h3>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <p> Do You Want to Delete this User ?</p>
+            <p class="remUser"> Do You Want to Delete this User ?</p>
+            <div class="but-del">
             <button type="button" class="btn btn-success" id="btn_delete_record">Delete Now</button>
             <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btn_close">Close</button>
+            </div>
           </div>
+          <div class="result">
+          Success!
+        </div>
         </div>
       </div>
     </div>
@@ -111,8 +188,9 @@
     <div>
     <button class="btn btn-success mt-2" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-user-plus fa-2x"></i></button>
             <select id="stat">
-              <option id="online" value="Online">Active</option>
-              <option id="not_online" value="Not_online">Not_active</option>
+            <option id="choiceDown">Please select</option>
+              <option id="online" value="Online">Set active</option>
+              <option id="not_online" value="Not_online">Set not active</option>
               <option id="clear" value="Del">Delete</option>
             </select>
             <button type="submit" class="btn btn-primary" id="oki">Ok</button>
@@ -153,6 +231,7 @@
         <button type="submit" class="btn btn-dark">Save</button>
         </form>
       </div>
+      <div class="results"></div>
     </div>
   </div>
 </div>
